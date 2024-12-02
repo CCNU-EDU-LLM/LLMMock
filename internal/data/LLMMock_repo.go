@@ -28,9 +28,9 @@ func (L LLMMock) TestConnect(ctx context.Context) (*biz.TestConnect, error) {
 func (L LLMMock) SendMessage(ctx context.Context, msg *biz.SendMessage) (*biz.SessionMessage, *biz.SessionMessage, error) {
 	return &biz.SessionMessage{
 			Role:    "user",
-			Content: "Message, I am a user",
+			Content: msg.Message,
 		}, &biz.SessionMessage{
-			Role:    "robot",
+			Role:    msg.ModelName,
 			Content: "Message, I am a robot",
 		}, nil
 }
@@ -42,11 +42,19 @@ func (L LLMMock) GetHistory(ctx context.Context, sessionId string) (*biz.GetHist
 				Role:    "user",
 				Content: "Message, I am a user",
 			},
+			{
+				Role:    "user",
+				Content: "Message, I am a user again",
+			},
 		},
 		BotMessages: []biz.SessionMessage{
 			{
 				Role:    "robot",
 				Content: "Message, I am a robot",
+			},
+			{
+				Role:    "robot",
+				Content: "Message, I am a robot again",
 			},
 		},
 	}, nil
