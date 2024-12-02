@@ -16,7 +16,7 @@ func NewGRPCServer(c *conf.Server, greeter *service.LLMMockService, logger log.L
 	var opts = []grpc.ServerOption{
 		grpc.Middleware(
 			recovery.Recovery(),
-			auth.JWTAuth(),
+			auth.JWTAuth(), // auth middleware
 		),
 	}
 	if c.Grpc.Network != "" {
