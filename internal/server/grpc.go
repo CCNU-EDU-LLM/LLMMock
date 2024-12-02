@@ -3,6 +3,7 @@ package server
 import (
 	v1 "LLMMock/api/LLMMock/v1"
 	"LLMMock/internal/conf"
+	"LLMMock/internal/middleware/auth"
 	"LLMMock/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -15,6 +16,7 @@ func NewGRPCServer(c *conf.Server, greeter *service.LLMMockService, logger log.L
 	var opts = []grpc.ServerOption{
 		grpc.Middleware(
 			recovery.Recovery(),
+			auth.JWTAuth(),
 		),
 	}
 	if c.Grpc.Network != "" {
