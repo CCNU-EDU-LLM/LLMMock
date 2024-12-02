@@ -9,11 +9,11 @@ option java_multiple_files = true;
 option java_package = "dev.kratos.api.LLMMock.v1";
 option java_outer_classname = "LLMMockProtoV1";
 
-service Greeter {
+service LLMMock {
   //根目录，验证服务是否正常运行，无需参数
   rpc SayHello (RootRequest) returns (RootReply) {
     option (google.api.http) = {
-      get: ""
+      get: "/"
     };
   }
 
@@ -32,7 +32,7 @@ service Greeter {
 
   rpc DeleteHistory (DeleteHistoryRequest) returns (DeleteHistoryReply) {
     option (google.api.http) = {
-      post: "/history"
+      post: "/clear_history"
       body: "*"
     };
   }
@@ -45,7 +45,7 @@ message RootReply {
 }
 
 message SendMessageRequest{
-  int64  session_id = 1;
+  string  session_id = 1;
   string message = 2;
   string model_name = 3;
 }
@@ -62,7 +62,7 @@ message SendMessageReply{
 }
 
 message GetHistoryRequest{
-  int64 session_id = 1;
+  string session_id = 1;
 }
 
 message GetHistoryReply{
@@ -71,7 +71,7 @@ message GetHistoryReply{
 }
 
 message DeleteHistoryRequest{
-  int64 session_id = 1;
+  string session_id = 1;
 }
 
 message DeleteHistoryReply{

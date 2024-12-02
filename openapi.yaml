@@ -3,15 +3,15 @@
 
 openapi: 3.0.3
 info:
-    title: Greeter API
+    title: LLMMock API
     version: 0.0.1
 paths:
-    "":
+    /:
         get:
             tags:
-                - Greeter
+                - LLMMock
             description: 根目录，验证服务是否正常运行，无需参数
-            operationId: Greeter_SayHello
+            operationId: LLMMock_SayHello
             responses:
                 "200":
                     description: OK
@@ -22,8 +22,8 @@ paths:
     /chat:
         post:
             tags:
-                - Greeter
-            operationId: Greeter_SendMessage
+                - LLMMock
+            operationId: LLMMock_SendMessage
             requestBody:
                 content:
                     application/json:
@@ -37,27 +37,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/helloworld.v1.SendMessageReply'
-    /history:
-        get:
-            tags:
-                - Greeter
-            operationId: Greeter_GetHistory
-            parameters:
-                - name: sessionId
-                  in: query
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/helloworld.v1.GetHistoryReply'
+    /clear_history:
         post:
             tags:
-                - Greeter
-            operationId: Greeter_DeleteHistory
+                - LLMMock
+            operationId: LLMMock_DeleteHistory
             requestBody:
                 content:
                     application/json:
@@ -71,6 +55,23 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/helloworld.v1.DeleteHistoryReply'
+    /history:
+        get:
+            tags:
+                - LLMMock
+            operationId: LLMMock_GetHistory
+            parameters:
+                - name: sessionId
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.GetHistoryReply'
 components:
     schemas:
         helloworld.v1.DeleteHistoryReply:
@@ -125,4 +126,4 @@ components:
                 content:
                     type: string
 tags:
-    - name: Greeter
+    - name: LLMMock
