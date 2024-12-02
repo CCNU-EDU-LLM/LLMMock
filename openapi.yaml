@@ -1,0 +1,128 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Greeter API
+    version: 0.0.1
+paths:
+    "":
+        get:
+            tags:
+                - Greeter
+            description: 根目录，验证服务是否正常运行，无需参数
+            operationId: Greeter_SayHello
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.RootReply'
+    /chat:
+        post:
+            tags:
+                - Greeter
+            operationId: Greeter_SendMessage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/helloworld.v1.SendMessageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.SendMessageReply'
+    /history:
+        get:
+            tags:
+                - Greeter
+            operationId: Greeter_GetHistory
+            parameters:
+                - name: sessionId
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.GetHistoryReply'
+        post:
+            tags:
+                - Greeter
+            operationId: Greeter_DeleteHistory
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/helloworld.v1.DeleteHistoryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.DeleteHistoryReply'
+components:
+    schemas:
+        helloworld.v1.DeleteHistoryReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        helloworld.v1.DeleteHistoryRequest:
+            type: object
+            properties:
+                sessionId:
+                    type: string
+        helloworld.v1.GetHistoryReply:
+            type: object
+            properties:
+                sessionMessages:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/helloworld.v1.SessionMessage'
+                botMessages:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/helloworld.v1.SessionMessage'
+        helloworld.v1.RootReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        helloworld.v1.SendMessageReply:
+            type: object
+            properties:
+                response:
+                    type: string
+                sessionMessages:
+                    $ref: '#/components/schemas/helloworld.v1.SessionMessage'
+                botMessages:
+                    $ref: '#/components/schemas/helloworld.v1.SessionMessage'
+        helloworld.v1.SendMessageRequest:
+            type: object
+            properties:
+                sessionId:
+                    type: string
+                message:
+                    type: string
+                modelName:
+                    type: string
+        helloworld.v1.SessionMessage:
+            type: object
+            properties:
+                role:
+                    type: string
+                content:
+                    type: string
+tags:
+    - name: Greeter

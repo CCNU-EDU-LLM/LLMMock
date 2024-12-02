@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package helloworld.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "LLMMock/api/LLMMock/v1;v1";
+option java_multiple_files = true;
+option java_package = "dev.kratos.api.LLMMock.v1";
+option java_outer_classname = "LLMMockProtoV1";
+
+service Greeter {
+  //根目录，验证服务是否正常运行，无需参数
+  rpc SayHello (RootRequest) returns (RootReply) {
+    option (google.api.http) = {
+      get: ""
+    };
+  }
+
+  rpc SendMessage (SendMessageRequest) returns (SendMessageReply) {
+    option (google.api.http) = {
+      post: "/chat"
+      body: "*"
+    };
+  }
+
+  rpc GetHistory (GetHistoryRequest) returns (GetHistoryReply) {
+    option (google.api.http) = {
+      get: "/history"
+    };
+  }
+
+  rpc DeleteHistory (DeleteHistoryRequest) returns (DeleteHistoryReply) {
+    option (google.api.http) = {
+      post: "/history"
+      body: "*"
+    };
+  }
+}
+
+message RootRequest {}
+
+message RootReply {
+  string message = 1;
+}
+
+message SendMessageRequest{
+  int64  session_id = 1;
+  string message = 2;
+  string model_name = 3;
+}
+
+message SessionMessage {
+  string role = 1; // user or bot
+  string content = 2; // 用户消息 or 机器人回复
+}
+
+message SendMessageReply{
+  string response = 1;
+  SessionMessage session_messages = 2;  // user
+  SessionMessage bot_messages = 3;  // bot
+}
+
+message GetHistoryRequest{
+  int64 session_id = 1;
+}
+
+message GetHistoryReply{
+  repeated SessionMessage session_messages = 1;  // user
+  repeated SessionMessage bot_messages = 2;  // bot
+}
+
+message DeleteHistoryRequest{
+  int64 session_id = 1;
+}
+
+message DeleteHistoryReply{
+  string message = 1;
+}
