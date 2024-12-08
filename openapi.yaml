@@ -18,7 +18,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.RootReply'
+                                $ref: '#/components/schemas/LLMMock.v1.RootReply'
     /chat:
         post:
             tags:
@@ -28,7 +28,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.SendMessageRequest'
+                            $ref: '#/components/schemas/LLMMock.v1.SendMessageRequest'
                 required: true
             responses:
                 "200":
@@ -36,7 +36,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.SendMessageReply'
+                                $ref: '#/components/schemas/LLMMock.v1.SendMessageReply'
     /clear_history:
         post:
             tags:
@@ -46,7 +46,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/helloworld.v1.DeleteHistoryRequest'
+                            $ref: '#/components/schemas/LLMMock.v1.DeleteHistoryRequest'
                 required: true
             responses:
                 "200":
@@ -54,7 +54,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.DeleteHistoryReply'
+                                $ref: '#/components/schemas/LLMMock.v1.DeleteHistoryReply'
     /history:
         get:
             tags:
@@ -71,45 +71,45 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.GetHistoryReply'
+                                $ref: '#/components/schemas/LLMMock.v1.GetHistoryReply'
 components:
     schemas:
-        helloworld.v1.DeleteHistoryReply:
+        LLMMock.v1.DeleteHistoryReply:
             type: object
             properties:
                 message:
                     type: string
-        helloworld.v1.DeleteHistoryRequest:
+        LLMMock.v1.DeleteHistoryRequest:
             type: object
             properties:
                 sessionId:
                     type: string
-        helloworld.v1.GetHistoryReply:
+        LLMMock.v1.GetHistoryReply:
             type: object
             properties:
                 sessionMessages:
                     type: array
                     items:
-                        $ref: '#/components/schemas/helloworld.v1.SessionMessage'
+                        $ref: '#/components/schemas/LLMMock.v1.SessionMessage'
                 botMessages:
                     type: array
                     items:
-                        $ref: '#/components/schemas/helloworld.v1.SessionMessage'
-        helloworld.v1.RootReply:
+                        $ref: '#/components/schemas/LLMMock.v1.SessionMessage'
+        LLMMock.v1.RootReply:
             type: object
             properties:
                 message:
                     type: string
-        helloworld.v1.SendMessageReply:
+        LLMMock.v1.SendMessageReply:
             type: object
             properties:
                 response:
                     type: string
                 sessionMessages:
-                    $ref: '#/components/schemas/helloworld.v1.SessionMessage'
+                    $ref: '#/components/schemas/LLMMock.v1.SessionMessage'
                 botMessages:
-                    $ref: '#/components/schemas/helloworld.v1.SessionMessage'
-        helloworld.v1.SendMessageRequest:
+                    $ref: '#/components/schemas/LLMMock.v1.SessionMessage'
+        LLMMock.v1.SendMessageRequest:
             type: object
             properties:
                 sessionId:
@@ -118,7 +118,7 @@ components:
                     type: string
                 modelName:
                     type: string
-        helloworld.v1.SessionMessage:
+        LLMMock.v1.SessionMessage:
             type: object
             properties:
                 role:

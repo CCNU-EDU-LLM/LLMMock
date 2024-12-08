@@ -19,10 +19,10 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationLLMMockDeleteHistory = "/helloworld.v1.LLMMock/DeleteHistory"
-const OperationLLMMockGetHistory = "/helloworld.v1.LLMMock/GetHistory"
-const OperationLLMMockSayHello = "/helloworld.v1.LLMMock/SayHello"
-const OperationLLMMockSendMessage = "/helloworld.v1.LLMMock/SendMessage"
+const OperationLLMMockDeleteHistory = "/LLMMock.v1.LLMMock/DeleteHistory"
+const OperationLLMMockGetHistory = "/LLMMock.v1.LLMMock/GetHistory"
+const OperationLLMMockSayHello = "/LLMMock.v1.LLMMock/SayHello"
+const OperationLLMMockSendMessage = "/LLMMock.v1.LLMMock/SendMessage"
 
 type LLMMockHTTPServer interface {
 	DeleteHistory(context.Context, *DeleteHistoryRequest) (*DeleteHistoryReply, error)

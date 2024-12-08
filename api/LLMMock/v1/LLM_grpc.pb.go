@@ -19,10 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	LLMMock_SayHello_FullMethodName      = "/helloworld.v1.LLMMock/SayHello"
-	LLMMock_SendMessage_FullMethodName   = "/helloworld.v1.LLMMock/SendMessage"
-	LLMMock_GetHistory_FullMethodName    = "/helloworld.v1.LLMMock/GetHistory"
-	LLMMock_DeleteHistory_FullMethodName = "/helloworld.v1.LLMMock/DeleteHistory"
+	LLMMock_SayHello_FullMethodName      = "/LLMMock.v1.LLMMock/SayHello"
+	LLMMock_SendMessage_FullMethodName   = "/LLMMock.v1.LLMMock/SendMessage"
+	LLMMock_GetHistory_FullMethodName    = "/LLMMock.v1.LLMMock/GetHistory"
+	LLMMock_DeleteHistory_FullMethodName = "/LLMMock.v1.LLMMock/DeleteHistory"
 )
 
 // LLMMockClient is the client API for LLMMock service.
@@ -197,7 +197,7 @@ func _LLMMock_DeleteHistory_Handler(srv interface{}, ctx context.Context, dec fu
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var LLMMock_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "helloworld.v1.LLMMock",
+	ServiceName: "LLMMock.v1.LLMMock",
 	HandlerType: (*LLMMockServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

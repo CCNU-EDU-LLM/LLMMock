@@ -15,6 +15,7 @@ func NewHTTPServer(c *conf.Server, greeter *service.LLMMockService, logger log.L
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
+			// selector.Server(auth.JWTAuth()).Path("/LLMMock.v1.LLMMock/SendMessage").Build(), // auth middleware
 			auth.JWTAuth(), // auth middleware
 		),
 	}
