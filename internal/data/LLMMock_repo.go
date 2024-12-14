@@ -2,8 +2,9 @@ package data
 
 import (
 	"LLMMock/internal/biz"
+	"LLMMock/internal/middleware/auth"
 	"context"
-
+	"fmt"
 	"github.com/go-kratos/kratos/v2/log"
 )
 
@@ -61,7 +62,25 @@ func (L LLMMock) GetHistory(ctx context.Context, sessionId string) (*biz.GetHist
 }
 
 func (L LLMMock) DeleteHistory(ctx context.Context, sessionId string) (*biz.DeleteHistoryResponse, error) {
+	claims, ok := ctx.Value("claims").(*auth.CustomClaims)
+	if !ok {
+		return nil, fmt.Errorf("claims not found or invalid type")
+	}
+
+	// middleware/auth/auth.go
+	// 从 context 中获取 CustomClaims
+	// type CustomClaims struct {
+	// 		Email                string `json:"email"`
+	//	    jwt.RegisteredClaims
+	// }
+
+	// 使用 CustomClaims 的数据
+	m := map[string]string{
+		"email": claims.Email,
+		"iss":   claims.Issuer,
+	}
+
 	return &biz.DeleteHistoryResponse{
-		Message: "History successful deleted",
+		Message: "user: " + m["email"] + "sessionId: " + sessionId + " deleted successfully",
 	}, nil
 }
